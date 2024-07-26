@@ -21,6 +21,22 @@ class Board:
         #generate new board
         board = [[None for _ in range(self.dim_size)] for _ in range(self.dim_size)]
 
+        #plant bombs
+        bombs_planted = 0 
+        while bombs_planted < self.num_bombs:
+            loc = random.randint(0, self.dim_size**2 - 1) #this returns a random integer N such that a <= N
+            row = loc // self.dim_size # nmber of times dim_size goes in loc
+            col = loc  % self.dim_size # remainder to tell what index in that row to look at 
+
+            if board[row][col] == '*':
+                # this will mean there is already a bomb planted so keep going
+                continue
+
+            board[row][col] = '*' #plant bomb
+            bombs_planted += 1
+        
+        return board
+
 # play the game 
 def play(dim_size=10, num_bombs=10)
     #Step 1: create the board and plant the bombs
