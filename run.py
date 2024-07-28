@@ -68,7 +68,7 @@ class Board:
 
         num_neighboring_bombs = 0 
         for r in range(max (0, row-1), min(self.dim_size - 1, row+1)+1):  # for the current row check bellow and above
-            for c in range(max (0, col-1), min(self.dim_size - 1, row+1) +1): # for the current collumn check left and right. Min & Max make sure not to go out of bounds!
+            for c in range(max (0, col-1), min(self.dim_size - 1, col+1) +1): # for the current collumn check left and right. Min & Max make sure not to go out of bounds!
                 if r == row and c == col:
                     #orginal location, no need for check
                     continue
@@ -104,19 +104,20 @@ class Board:
         return True
 
     def __str__(self):
-        #returns a string that shows the board to the player
+        # returns a string that shows the board to the player
 
-        #array to represent what the user would see
+        # array to represent what the user would see
         visible_board = [[None for _ in range(self.dim_size)] for _ in range(self.dim_size)]
         for row in range(self.dim_size):
-            if (row, col) in self.dug: 
-                visible_board[row][col] = str(self.board[row][col])
-            else:
-                visible_board[row][col] = ''
+            for col in range(self.dim_size):
+                if (row, col) in self.dug: 
+                    visible_board[row][col] = str(self.board[row][col])
+                else:
+                    visible_board[row][col] = ' '
         
-        #put this in a string
+        # put this in a string
         string_rep = ''
-        #max column widths for printing
+        # get max column widths for printing
         widths = []
         for idx in range(self.dim_size):
             columns = map(lambda x: x[idx], visible_board)
@@ -126,28 +127,28 @@ class Board:
                 )
             )
         
-        #print csv strings
+        # print the csv strings
         indices = [i for i in range(self.dim_size)]
-        indices_row = '  '
+        indices_row = '   '
         cells = []
         for idx, col in enumerate(indices):
             format = '%-' + str(widths[idx]) + "s"
             cells.append(format % (col))
-        indices_row += ' '.join(cells)
-        indices_row += ' \n'
+        indices_row += '  '.join(cells)
+        indices_row += '\n'
 
-        for i  in range (len(visible_board)):
+        for i in range(len(visible_board)):
             row = visible_board[i]
-            string_rep += f'{i} |'
+            string_rep += f'{i:2d}|'
             cells = []
-            for idx, col in enumerate(indices):
+            for idx, col in enumerate(row):
                 format = '%-' + str(widths[idx]) + "s"
                 cells.append(format % (col))
-            indices_row += ' '.join(cells)
-            indices_row += ' \n'
-        
+            string_rep += ' |'.join(cells)
+            string_rep += ' |\n'
+
         str_len = int(len(string_rep) / self.dim_size)
-        string_rep = indices_row + '_'*str_len + '\n' + string_rep + '_'*str_len
+        string_rep = indices_row + '-'*str_len + '\n' + string_rep + '-'*str_len
 
         return string_rep
 
