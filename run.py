@@ -174,5 +174,10 @@ def play(dim_size=10, num_bombs=10):
             break # (game over rip)
 
     # 2 ways to end loop
-    
-
+    if safe:
+        print("CONGRATS!! YOU FIGURED IT OUT")
+    else:
+        print("SORRY GAME OVER :(")
+        #print whole board
+        board.dug = [(r,c) for r in range(board.dim_size) for c in range (board.dim_size)]
+        print(board)
