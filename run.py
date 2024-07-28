@@ -104,6 +104,20 @@ class Board:
         for row in range(self.dim_size):
             if (row, col) in self.dug: 
                 visible_board[row][col] = str(self.board[row][col])
+            else:
+                visible_board[row][col] = ''
+        
+        #put this in a string
+        string_rep = ''
+        #max column widths for printing
+        widths = []
+        for idx in range(self.dim_size):
+            columns = map(lambda x: x[idx], visible_board)
+            widths.append(
+                len(
+                    max(columns, key = len)
+                )
+            )
 
 # play the game 
 def play(dim_size=10, num_bombs=10):
