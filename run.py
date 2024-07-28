@@ -12,6 +12,7 @@ class Board:
         #Let's create the board
         #helper function
         self.board = self.make_new_board() # plant the bomb
+        self.assign_values_to_board()
 
         #initialize a set to keep track of which locations have been dub
         #save (row,col) tuples into this set
@@ -49,18 +50,21 @@ class Board:
                 if self.board[r][c] == '*':
                     #if already a bommmb nothing needs to be calc
                     continue
-                self.board[r] = self.get_num_neighboring_bombs(r,c) 
+                self.board[r][c] = self.get_num_neighboring_bombs(r,c)
     
     def get_num_neighboring_bombs(self, row, col):
-        #iterate each neighboring position and sum number of bombs
-        # top left: (row-1, col-1)
-        # top middle: (row-1, col)
-        # top right: (row-1, co+1)
-        # left: (row, col-1)
-        # right: (row, col+1)
-        # bottom left (row+1, col-1)
-        # bottom middle (row+1, col)
-        # bottm right (row+1, col +1)
+        """
+        iterate each neighboring position and sum number of bombs
+        top left: (row-1, col-1)
+        top middle: (row-1, col)
+        top right: (row-1, co+1)
+        left: (row, col-1)
+        right: (row, col+1)
+        bottom left (row+1, col-1)
+        bottom middle (row+1, col)
+        bottm right (row+1, col +1)
+        """
+
 
         num_neighboring_bombs = 0 
         for r in range(max (0, row-1), min(self.dim_size - 1, row+1)+1):  # for the current row check bellow and above
@@ -181,3 +185,5 @@ def play(dim_size=10, num_bombs=10):
         #print whole board
         board.dug = [(r,c) for r in range(board.dim_size) for c in range (board.dim_size)]
         print(board)
+if __name__ == '__main__': 
+        play()
