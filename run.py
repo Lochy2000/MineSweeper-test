@@ -1,3 +1,6 @@
+import random
+import re
+
 #Board object to represent the minesweeper game
 # i.e "create new board object" or "dig here", or "render this game for this object"
 class Board: 
@@ -156,6 +159,11 @@ def play(dim_size=10, num_bombs=10):
     
     while len(board.dug) < board.dim_size ** 2 - num_bombs:
         print(board)
-        user_input = re.split(',(\\s)*', input("Where would you like to dig? Input as row,col(ex:1,3):")) #rej x.split used to split the input string by the user.
+        # 0,0 or 0, 0 or 0,  0
+        user_input = re.split(',(\\s)*', input("Where would you like to dig? Input as row,col(ex:1,3):")) #rej x.split used to split the input string by the user. This tells what row and col the user is tryting to dig
+        row, col = int(user_input[0]), int(user_input[-1]) #user input assigned to a row and col. 
+        if row < 0 or row >= board.dim_size or col < 0 or col >= dim_size: #makes sure input is not out of bounds
+            print("Invalid location. Try again.")
+            continue
 
-    pass
+
