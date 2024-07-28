@@ -96,6 +96,15 @@ class Board:
         #first dig doen't hit bomb, shouldn't be able to hit a bomb here
         return True
 
+    def __str__(self):
+        #returns a string that shows the board to the player
+
+        #array to represent what the user would see
+        visible_board = [[None for _ in range(self.dim_size)] for _ in range(self.dim_size)]
+        for row in range(self.dim_size):
+            if (row, col) in self.dug: 
+                visible_board[row][col] = str(self.board[row][col])
+
 # play the game 
 def play(dim_size=10, num_bombs=10):
     #Step 1: create the board and plant the bombs
