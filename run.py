@@ -165,31 +165,32 @@ def play(dim_size=10, num_bombs=10):
     """
 
     board = Board(dim_size, num_bombs)
-    safe = True #havent dug anything, safe until bomb hit
+    safe = True
 
     while len(board.dug) < board.dim_size ** 2 - num_bombs:
         print(board)
-        # 0,0 or 0, 0 or 0,  0
-        user_input = re.split(',(\\s)*', input("Where would you like to dig? Input as row,col(ex:1,3):")) #rej x.split used to split the input string by the user. This tells what row and col the user is tryting to dig
-        row, col = int(user_input[0]), int(user_input[-1]) #user input assigned to a row and col. 
-
-        if row < 0 or row >= board.dim_size or col < 0 or col >= dim_size: #makes sure input is not out of bounds
-            print("Invalid location. Try again.")
+        user_input = input("Where would you like to dig? Input as row,col (ex: 1,3): ")
+        
+        try:
+            row, col = map(int, re.split(',\\s*', user_input.strip()))
+        except ValueError:
+            print("Invalid input. Please enter two numbers separated by a comma.")
             continue
 
-        # if it's valid, we dig
-        safe = board.dig(row,col) #will stay true if safe and change to false when a bomb is hit
-        if not safe:
-            #bomb dug
-            break #(game over rip)
+        if row < 0 or row >= board.dim_size or col < 0 or col >= board.dim_size:
+            print(f"Invalid location. Enter row and column between 0 and {board.dim_size - 1}.")
+            continue
 
-    # 2 ways to end loop
+        safe = board.dig(row, col)
+        if not safe:
+            break
+
     if safe:
-        print("CONGRATS!! YOU FIGURED IT OUT")
+        print("CONGRATULATIONS!! YOU WON!")
     else:
-        print("SORRY GAME OVER :(")
-        #print whole board
-        board.dug = [(r,c) for r in range(board.dim_size) for c in range (board.dim_size)]
+        print("SORRY, GAME OVER :(")
+        board.dug = [(r,c) for r in range(board.dim_size) for c in range(board.dim_size)]
         print(board)
-if __name__ == '__main__': 
-        play()
+
+if __name__ == '__main__':
+    play()
