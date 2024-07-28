@@ -156,7 +156,8 @@ def play(dim_size=10, num_bombs=10):
     #Step 3b: if location is not a bomb, dig recursively until each sqaure is at least
     #         next to a bomb
     #Step 4: repeat steps 2 and 3a/b until there are no more places to dig -> VICTORY!
-    
+    safe = True #havent dug anything, safe until bomb hit
+
     while len(board.dug) < board.dim_size ** 2 - num_bombs:
         print(board)
         # 0,0 or 0, 0 or 0,  0
@@ -166,4 +167,12 @@ def play(dim_size=10, num_bombs=10):
             print("Invalid location. Try again.")
             continue
 
+        # if it's valid, we dig
+        safe = board.dig(row,col) #will stay true if safe and change to false when a bomb is hit
+        if not safe:
+            #bomb dug
+            break # (game over rip)
+
+    # 2 ways to end loop
+    
 
