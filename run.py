@@ -95,7 +95,7 @@ class Board:
         
         #self.board[row][col] == 0
         for r in range(max (0, row-1), min(self.dim_size - 1, row+1)+1):
-            for c in range(max (0, col-1), min(self.dim_size - 1, row+1) +1):
+            for c in range(max (0, col-1), min(self.dim_size - 1, col+1) +1):
                 if (r,c) in self.dug:
                     continue #don't dig where already dug
                 self.dig(r,c)
@@ -168,6 +168,7 @@ def play(dim_size=10, num_bombs=10):
         # 0,0 or 0, 0 or 0,  0
         user_input = re.split(',(\\s)*', input("Where would you like to dig? Input as row,col(ex:1,3):")) #rej x.split used to split the input string by the user. This tells what row and col the user is tryting to dig
         row, col = int(user_input[0]), int(user_input[-1]) #user input assigned to a row and col. 
+
         if row < 0 or row >= board.dim_size or col < 0 or col >= dim_size: #makes sure input is not out of bounds
             print("Invalid location. Try again.")
             continue
@@ -176,7 +177,7 @@ def play(dim_size=10, num_bombs=10):
         safe = board.dig(row,col) #will stay true if safe and change to false when a bomb is hit
         if not safe:
             #bomb dug
-            break # (game over rip)
+            break #(game over rip)
 
     # 2 ways to end loop
     if safe:
