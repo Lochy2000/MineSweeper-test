@@ -1,15 +1,21 @@
 import random
 import re
 
-#Board object to represent the minesweeper game
-# i.e "create new board object" or "dig here", or "render this game for this object"
+
 class Board: 
+    """
+    Board object to represent the minesweeper game
+    i.e "create new board object" or "dig here", or "render this game for this object"
+    """
     def __init__(self, dim_size, num_bombs):
-        #Keep track of parameters
+        
+        """
+        Keep track of parameters
+        """
         self.dim_size = dim_size
         self.num_bombs = num_bombs
 
-        #Let's create the board
+        #create the board
         #helper function
         self.board = self.make_new_board() # plant the bomb
         self.assign_values_to_board()
@@ -17,12 +23,15 @@ class Board:
         #initialize a set to keep track of which locations have been dub
         #save (row,col) tuples into this set
         self.dug = set() # ie dig at 0,0, self_dug = {[0,0]}
+        self.flagged = set() #keep track of flags locaiton
     
     def make_new_board(self):
-        #constuct new board based on dim size and num bombs
-        #using lists of lists
+        """
+        constuct new board based on dim size and num bombs
+        using lists of lists.
+        """
 
-        #generate new board
+        #generate new empty board
         board = [[None for _ in range(self.dim_size)] for _ in range(self.dim_size)]
 
         #plant bombs
@@ -42,9 +51,10 @@ class Board:
         return board
 
     def assign_values_to_board(self):
-        #bombs planted, assign number 0-8 for all empty spaces, which represents 
-        #how many neighboring bombs there are. Precompute in order to save time
-        #checking whats around the board later.
+        """
+        bombs planted, assign number 0-8 for all empty spaces, which represents 
+        how many neighboring bombs there are.
+        """
         for r in range(self.dim_size):#row index
             for c in range(self.dim_size):#column index
                 if self.board[r][c] == '*':
@@ -78,13 +88,17 @@ class Board:
         return num_neighboring_bombs
 
     def dig(self, row, col):
-        #dig at the location
-        #Return trye if dig is success, false if bomb is hit.
 
-        #Possible scenarios
-        #hit bomb -> game over
-        #neighboring bombs -> finish dig
-        #no neighboring bombs -> recursively dig
+        """"
+        dig at the location
+        Return true if dig is success, false if bomb is hit.
+
+        Possible scenarios
+        hit bomb -> game over
+        neighboring bombs -> finish dig
+        no neighboring bombs -> recursively dig
+        """
+
 
         self.dug.add((row, col)) #keep track of dig
 
@@ -103,14 +117,34 @@ class Board:
         #first dig doen't hit bomb, shouldn't be able to hit a bomb here
         return True
 
+    def flag(self, row, col):
+        """
+        If not dug or bomb then is a flag.
+        """
+        if (row, col) not in self.dug:
+            if (row, col) in self.flagged:
+                self.flagged.remove((row, col))
+                return "Flag removed from ({},{})".format(row, col)
+            else:
+                self.flagged.add((row, col))
+                return "Flag placed at ({},{})".format(row, col)
+        return "Cannot place flag on dug location"
+
     def __str__(self):
+        """
+        Insured player sees the game board in a formated way that looks similar to 
+        minesweeper game.
+        """
         # returns a string that shows the board to the player
 
-        # array to represent what the user would see
+        # nested loop iterates through each cell in the board, if the (col,row)
+        # is in self.dug the value is visible to the player otherwise it is hidden
         visible_board = [[None for _ in range(self.dim_size)] for _ in range(self.dim_size)]
         for row in range(self.dim_size):
             for col in range(self.dim_size):
-                if (row, col) in self.dug: 
+                if (row, col) in self.flagged:
+                    visible_board[row][col] = 'F'
+                elif (row, col) in self.dug:
                     visible_board[row][col] = str(self.board[row][col])
                 else:
                     visible_board[row][col] = ' '
@@ -118,6 +152,7 @@ class Board:
         # put this in a string
         string_rep = ''
         # get max column widths for printing
+        #The map function is used to extract each column from visible_board, and the maximum length of the string in each column is calculated.
         widths = []
         for idx in range(self.dim_size):
             columns = map(lambda x: x[idx], visible_board)
@@ -128,6 +163,7 @@ class Board:
             )
         
         # print the csv strings
+        #indices_row is a string that represents the column headers (0, 1, 2, ...)
         indices = [i for i in range(self.dim_size)]
         indices_row = '   '
         cells = []
@@ -169,21 +205,29 @@ def play(dim_size=10, num_bombs=10):
 
     while len(board.dug) < board.dim_size ** 2 - num_bombs:
         print(board)
-        user_input = input("Where would you like to dig? Input as row,col (ex: 1,3): ")
+        user_input = input("Where would you like to dig or place a flag? Input as row,col or f row,col for flag (ex: 1,3 or f 1,3): ")
         
         try:
-            row, col = map(int, re.split(',\\s*', user_input.strip()))
+            if user_input.lower().startswith('f'):
+                action, coords = user_input.split(None, 1)
+                row, col = map(int, re.split(',\\s*', coords.strip()))
+                print(board.flag(row, col))
+                continue  # Skip the digging part and go to the next iteration
+            else:
+                row, col = map(int, re.split(',\\s*', user_input.strip()))
         except ValueError:
-            print("Invalid input. Please enter two numbers separated by a comma.")
+            print("Invalid input. Please enter two numbers separated by a comma, optionally preceded by 'f' for flag.")
             continue
 
         if row < 0 or row >= board.dim_size or col < 0 or col >= board.dim_size:
             print(f"Invalid location. Enter row and column between 0 and {board.dim_size - 1}.")
             continue
 
-        safe = board.dig(row, col)
-        if not safe:
-            break
+        # Only dig if it's not a flag operation
+        if not user_input.lower().startswith('f'):
+            safe = board.dig(row, col)
+            if not safe:
+                break
 
     if safe:
         print("CONGRATULATIONS!! YOU WON!")
