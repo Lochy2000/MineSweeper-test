@@ -1,5 +1,6 @@
 import random
 import re
+from termcolor import colored
 
 
 class Board: 
@@ -138,7 +139,7 @@ class Board:
         # returns a string that shows the board to the player
 
         # nested loop iterates through each cell in the board, if the (col,row)
-        # is in self.dug the value is visible to the player otherwise it is hidden
+        # is in self.dug/flagged, the value is visible to the player, otherwise it is hidden
         visible_board = [[None for _ in range(self.dim_size)] for _ in range(self.dim_size)]
         for row in range(self.dim_size):
             for col in range(self.dim_size):
