@@ -142,37 +142,53 @@ class Board:
 
         # nested loop iterates through each cell in the board, if the (col,row)
         # is in self.dug/flagged, the value is visible to the player, otherwise it is hidden
-        visible_board = [[' ' for _ in range(self.dim_size)] for _ in range(self.dim_size)]
+        visible_board = [[None for _ in range(self.dim_size)] for _ in range(self.dim_size)]
         for row in range(self.dim_size):
             for col in range(self.dim_size):
                 if (row, col) in self.flagged:
                     visible_board[row][col] = 'F'
                 elif (row, col) in self.dug:
-                    if self.board[row][col] == '*':
-                        visible_board[row][col] = '*'
-                    elif self.board[row][col] > 0:
-                        visible_board[row][col] = str(self.board[row][col])
-
-        # Create the string representation with colors
-        string_rep = '   ' + '  '.join(str(i) for i in range(self.dim_size)) + '\n'
-        string_rep += '--' + '-' * (self.dim_size * 3) + '\n'
-
-        for i in range(self.dim_size):
-            string_rep += f'{i:2d}|'
-            for j in range(self.dim_size):
-                cell = visible_board[i][j]
-                if cell == 'F':
-                    string_rep += Fore.BLUE + cell + Style.RESET_ALL
-                elif cell == '*':
-                    string_rep += Fore.RED + cell + Style.RESET_ALL
-                elif cell.isdigit():
-                    string_rep += Fore.YELLOW + cell + Style.RESET_ALL
+                    visible_board[row][col] = str(self.board[row][col])
                 else:
-                    string_rep += cell
-                string_rep += '|'
-            string_rep += '\n'
+                    visible_board[row][col] = ' '
+        
+        # put this in a string
+        string_rep = ''
+        # get max column widths for printing
+        #The map function is used to extract each column from visible_board, and the maximum length of the string in each column is calculated.
+        widths = []
+        for idx in range(self.dim_size):
+            columns = map(lambda x: x[idx], visible_board)
+            widths.append(
+                len(
+                    max(columns, key = len)
+                )
+            )
+        
+        # print the csv strings
+        #indices_row is a string that represents the column headers (0, 1, 2, ...)
+        indices = [i for i in range(self.dim_size)]
+        indices_row = '   '
+        cells = []
+        for idx, col in enumerate(indices):
+            format = '%-' + str(widths[idx]) + "s"
+            cells.append(format % (col))
+        indices_row += '  '.join(cells)
+        indices_row += '\n'
 
-        string_rep += '--' + '-' * (self.dim_size * 3)
+        for i in range(len(visible_board)):
+            row = visible_board[i]
+            string_rep += f'{i:2d}|'
+            cells = []
+            for idx, col in enumerate(row):
+                format = '%-' + str(widths[idx]) + "s"
+                cells.append(format % (col))
+            string_rep += ' |'.join(cells)
+            string_rep += ' |\n'
+
+        str_len = int(len(string_rep) / self.dim_size)
+        string_rep = indices_row + '-'*str_len + '\n' + string_rep + '-'*str_len
+
         return string_rep
 
 # play the game 
