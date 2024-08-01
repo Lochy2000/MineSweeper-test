@@ -180,16 +180,6 @@ class Board:
             row = visible_board[i]
             string_rep += f'{i:2d}|'
             cells = []
-            for j in range(self.dim_size):
-                cell = visible_board[i][j]
-                if cell == 'F':
-                    string_rep += Fore.BLUE + cell + Style.RESET_ALL
-                elif cell == '*':
-                    string_rep += Fore.RED + cell + Style.RESET_ALL
-                elif cell.isdigit():
-                    string_rep += Fore.YELLOW + cell + Style.RESET_ALL
-                else:
-                    string_rep += cell
             for idx, col in enumerate(row):
                 format = '%-' + str(widths[idx]) + "s"
                 cells.append(format % (col))
