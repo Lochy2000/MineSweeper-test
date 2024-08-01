@@ -1,6 +1,8 @@
 import random
 import re
-from termcolor import colored
+from colorama import Fore, Back, Style, init
+init()  # Initialize colorama
+
 
 
 class Board: 
@@ -144,9 +146,14 @@ class Board:
         for row in range(self.dim_size):
             for col in range(self.dim_size):
                 if (row, col) in self.flagged:
-                    visible_board[row][col] = 'F'
+                    visible_board[row][col] = Fore.BLUE + 'F' + Style.RESET_ALL
                 elif (row, col) in self.dug:
-                    visible_board[row][col] = str(self.board[row][col])
+                    if self.board[row][col] == '*':
+                        visible_board[row][col] = Fore.RED + '*' + Style.RESET_ALL
+                    elif self.board[row][col] > 0:
+                        visible_board[row][col] = Fore.YELLOW + str(self.board[row][col]) + Style.RESET_ALL
+                    else:
+                        visible_board[row][col] = str(self.board[row][col])
                 else:
                     visible_board[row][col] = ' '
         
