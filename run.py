@@ -5,6 +5,17 @@ from colorama import Fore, Style, init
 init(autoreset=True)
 
 
+ASCII_ART = """
+                     _                                                   
+                    (_)                                                  
+             _ __ ___  _ _ __   ___  _____      _____  ___ _ __   ___ _ __
+            | '_ ` _ \| | '_ \ / _ \/ __\ \ /\ / / _ \/ _ \ '_ \ / _ \ '__|
+            | | | | | | | | | |  __/\__ \\ V  V /  __/  __/ |_) |  __/ |   
+            |_| |_| |_|_|_| |_|\___||___/ \_/\_/ \___|\___| .__/ \___|_|   
+                                                        | |              
+                                                        |_|
+            """ 
+
 
 class Board: 
     """
@@ -212,7 +223,7 @@ def play(dim_size=10, num_bombs=10):
     next to a bomb
     Step 4: repeat steps 2 and 3a/b until there are no more places to dig -> VICTORY!
     """
-
+    print(Fore.GREEN + ASCII_ART + Style.RESET_ALL)  # Display the ASCII art title
     board = Board(dim_size, num_bombs)
     safe = True
 
