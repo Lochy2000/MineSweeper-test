@@ -1,6 +1,7 @@
 import random
 import re
-from colorama import Fore, Back, Style, init
+from colorama import Fore, Style, init
+
 init(autoreset=True)
 
 
@@ -146,43 +147,52 @@ class Board:
         for row in range(self.dim_size):
             for col in range(self.dim_size):
                 if (row, col) in self.flagged:
-                    visible_board[row][col] = 'F'
+                    visible_board[row][col] = Fore.BLUE + 'F' + Style.RESET_ALL
                 elif (row, col) in self.dug:
-                    visible_board[row][col] = str(self.board[row][col])
+                    if self.board[row][col] == '*':
+                        visible_board[row][col] = Fore.RED + '*' + Style.RESET_ALL
+                    elif self.board[row][col] > 0:
+                        visible_board[row][col] = Fore.YELLOW + str(self.board[row][col]) + Style.RESET_ALL
+                    else:
+                        visible_board[row][col] = str(self.board[row][col])
                 else:
                     visible_board[row][col] = ' '
-        
-        # put this in a string
-        string_rep = ''
-        # get max column widths for printing
-        #The map function is used to extract each column from visible_board, and the maximum length of the string in each column is calculated.
+
+        # To properly calculate column widths, we need to strip out the color codes
+        def strip_color(s):
+            """
+            Remove ANSI color codes from the string.
+            """
+            return re.sub(r'\x1b\[[0-9;]*m', '', s)
+
+        # Get max column widths for printing
         widths = []
         for idx in range(self.dim_size):
-            columns = map(lambda x: x[idx], visible_board)
+            columns = map(lambda x: strip_color(x[idx]), visible_board)
             widths.append(
                 len(
-                    max(columns, key =len)
+                    max(columns, key=len)
                 )
             )
-        
-        # print the csv strings
-        #indices_row is a string that represents the column headers (0, 1, 2, ...)
+
+        # Build the string representation of the board
         indices = [i for i in range(self.dim_size)]
         indices_row = '   '
         cells = []
         for idx, col in enumerate(indices):
-            format = '%-' + str(widths[idx]) + "s"
-            cells.append(format % (col))
+            format_str = '%-' + str(widths[idx]) + "s"
+            cells.append(format_str % (col))
         indices_row += '  '.join(cells)
         indices_row += '\n'
 
+        string_rep = ''
         for i in range(len(visible_board)):
             row = visible_board[i]
             string_rep += f'{i:2d}|'
             cells = []
             for idx, col in enumerate(row):
-                format = '%-' + str(widths[idx]) + "s"
-                cells.append(format % (col))
+                format_str = '%-' + str(widths[idx]) + "s"
+                cells.append(format_str % (col))
             string_rep += ' |'.join(cells)
             string_rep += ' |\n'
 
