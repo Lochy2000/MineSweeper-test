@@ -6,14 +6,12 @@ init(autoreset=True)
 
 #  ASCII art for "MINESWEEPER!" title
 ASCII_ART = r"""
-                     _                                                   
-                    (_)                                                  
-             _ __ ___  _ _ __   ___  _____      _____  ___ _ __   ___ _ __
-            | '_ ` _ \| | '_ \ / _ \/ __\ \ /\ / / _ \/ _ \ '_ \ / _ \ '__|
-            | | | | | | | | | |  __/\__ \\ V  V /  __/  __/ |_) |  __/ |   
-            |_| |_| |_|_|_| |_|\___||___/ \_/\_/ \___|\___| .__/ \___|_|   
-                                                        | |              
-                                                        |_|
+███╗   ███╗██╗███╗   ██╗███████╗███████╗██╗    ██╗███████╗███████╗██████╗ ███████╗██████╗ 
+████╗ ████║██║████╗  ██║██╔════╝██╔════╝██║    ██║██╔════╝██╔════╝██╔══██╗██╔════╝██╔══██╗
+██╔████╔██║██║██╔██╗ ██║█████╗  ███████╗██║ █╗ ██║█████╗  █████╗  ██████╔╝█████╗  ██████╔╝
+██║╚██╔╝██║██║██║╚██╗██║██╔══╝  ╚════██║██║███╗██║██╔══╝  ██╔══╝  ██╔═══╝ ██╔══╝  ██╔══██╗
+██║ ╚═╝ ██║██║██║ ╚████║███████╗███████║╚███╔███╔╝███████╗███████╗██║     ███████╗██║  ██║
+╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝ ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
             """ 
 #  ASCII art for "GAME OVER!!!"
 GAME_OVER_ART = r"""
@@ -259,13 +257,13 @@ def play(dim_size=10, num_bombs=10):
     next to a bomb
     Step 4: repeat steps 2 and 3a/b until there are no more places to dig -> VICTORY!
     """
-    print(Fore.GREEN + ASCII_ART + Style.RESET_ALL)  # Display the ASCII art title
+    print(Fore.LIGHTGREEN_EX + ASCII_ART + Style.RESET_ALL)  # Display the ASCII art title
     board = Board(dim_size, num_bombs)
     safe = True
 
     while len(board.dug) < board.dim_size ** 2 - num_bombs:
         print(board)
-        user_input = input("Where would you like to dig or place a flag? Input as row,col or f row,col for flag (ex: 1,3 or f 1,3): ")
+        user_input = input("Where would you like to dig or place a flag? Input as row,col or f row,col for flag (ex: 1,3 or f 1,3):\n ")
         
         try:
             if user_input.lower().startswith('f'):
