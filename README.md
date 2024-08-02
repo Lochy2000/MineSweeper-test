@@ -151,6 +151,9 @@ Difficulty levels. This can be done by adding three game modes which have more o
 -   Programming language was Python.
 
 -   I used the following Libraries:
+    Random - Build bomb locations.
+    Colorama - for board colour.
+    re - used for validation of flag and numbers.
 
 -   Github was used to store the repository for submission.
 
@@ -159,4 +162,10 @@ Difficulty levels. This can be done by adding three game modes which have more o
  
 
 ## Credits
+
+- My main help for this project came from a [freecodecamp video](https://www.youtube.com/watch?v=8ext9G7xspg&t=5236s&ab_channel=freeCodeCamp.org).
+- Used [StackOverflow](https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python)for trouble shooting.
+- Adding Flag used TokoEdTech [video](https://www.youtube.com/watch?v=XTT8mXwIGpQ&ab_channel=TokyoEdtech)
+- My mentor Spencor also helped come up with the idea of adding 'f' to the front of the inputs to add a flag.
+- Creds to my dad to passin on his extensive minesweeper knowleadge.
 
