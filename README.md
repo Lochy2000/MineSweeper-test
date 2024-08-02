@@ -103,38 +103,13 @@ Difficulty levels. This can be done by adding three game modes which have more o
 
 - Main bug was due to the adding of colorama to the game board. This caused a spacing issue on the board due to the colour codes not being taken into account when calculating the column widths. The issue was in the def __str__(self). The solution ended up using strip_color to remove color codes and calculate the maximum width for each column based on the actual content.
 
-   0  1  2  3  4  5  6  7  8  9
--------------------------------------------
- 0|   |   |   |   |   |   |   |   |   |   |
- 1|   |   |   |   |   |   |   |   |   |   |
- 2|   |   |   |   |   |   |   |   |   |   |
- 3|   |   |   |   |   |   |1|   |   |   |
- 4|   |   |   |   |   |   |   |   |   |   |
- 5|   |   |   |   |   |   |   |   |   |   |
- 6|   |   |   |   |   |   |   |   |   |   |
- 7|   |   |   |   |   |   |   |   |   |   |
- 8|   |   |   |   |   |   |   |   |   |   |
- 9|   |   |   |   |   |   |   |   |   |   |
--------------------------------------------
+![image](https://github.com/user-attachments/assets/3bc1e70b-bc36-4c53-b6e5-f90507bb1207)
 
-   0  1  2  3  4  5           6  7  8  9
--------------------------------------------
- 0|  |  |  |  |  |           |  |  |  |  |
- 1|  |  |  |  |  |           |  |  |  |  |
- 2|  |  |  |  |  |           |  |  |  |  |
- 3|  |  |  |  |  |F |  |  |  |  |
- 4|  |  |  |  |  |           |  |  |  |  |
- 5|  |  |  |  |  |           |  |  |  |  |
- 6|  |  |  |  |  |           |  |  |  |  |
- 7|  |  |  |  |  |           |  |  |  |  |
- 8|  |  |  |  |  |           |  |  |  |  |
- 9|  |  |  |  |  |           |  |  |  |  |
--------------------------------------------
 
 
 ### Unfixed bugs
 
-
+- Non to my knowledge
 
 ## Deployment
 
