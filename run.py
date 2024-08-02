@@ -6,11 +6,11 @@ init(autoreset=True)
 
 #  ASCII art for "MINESWEEPER!" title
 ASCII_ART = r"""
-███    ███ ██ ███    ██ ███████ ███████ ██     ██ ███████ ███████ ██████  ███████ ██████  
-████  ████ ██ ████   ██ ██      ██      ██     ██ ██      ██      ██   ██ ██      ██   ██ 
-██ ████ ██ ██ ██ ██  ██ █████   ███████ ██  █  ██ █████   █████   ██████  █████   ██████  
-██  ██  ██ ██ ██  ██ ██ ██           ██ ██ ███ ██ ██      ██      ██      ██      ██   ██ 
-██      ██ ██ ██   ████ ███████ ███████  ███ ███  ███████ ███████ ██      ███████ ██   ██
+╔════════════════════════════════════════════╗
+║░█▄█░▀█▀░█▀█░█▀▀░█▀▀░█░█░█▀▀░█▀▀░█▀█░█▀▀░█▀▄║
+║░█░█░░█░░█░█░█▀▀░▀▀█░█▄█░█▀▀░█▀▀░█▀▀░█▀▀░█▀▄║
+║░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░░░▀▀▀░▀░▀║
+╚════════════════════════════════════════════╝
             """ 
 #  ASCII art for "GAME OVER!!!"
 GAME_OVER_ART = r"""
@@ -264,7 +264,7 @@ def play(dim_size=10, num_bombs=10):
     Step 4: repeat steps 2 and 3a/b until there are no more places to dig -> VICTORY!
     """
     print(Fore.LIGHTGREEN_EX + ASCII_ART + Style.RESET_ALL)  # Display the ASCII art title
-    print(Fore.LIGHTGREEN_EX + "GAME INTRUCTIONS\n Guess all locations without bombs \n Input: row first followed by a comma then the collumn \n To place a flag put f infront of location ex: f 2,3 \n If you want to dig where a flag is, you must remove the flag first, by typing the location again with f infront ex: f 2,3.")
+    print(Fore.LIGHTGREEN_EX + "GAME INTRUCTIONS\n -Guess all locations without bombs\n -Input: row first followed by a comma then the collumn \n -To place a flag put f infront of location ex: f 2,3 \n -If you want to dig where a flag is, you must remove the flag first, by typing the location again with f infront ex: f 2,3.")
     board = Board(dim_size, num_bombs)
     safe = True
 
