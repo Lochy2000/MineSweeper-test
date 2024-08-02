@@ -114,15 +114,36 @@ Difficulty levels. This can be done by adding three game modes which have more o
 ## Deployment
 
 ### Version Control
- 
+- The game was made using Visual studio code. It was pushed to Github using a remote repository called ‘MineSweeper-Test’. Was called 'test' wasn't sure I would be able to use it as a project until I spoke with my mentor.
+- Git hub commands were used through-out to push the game to the remote repository. The commands used were as follows:
+
+  -Git add . – adds files to staging area
+  
+  -Git commit -m “ ” – commits changes to local repository to await to be pushed to Github
+  
+  -Git push – this pushes all code to remote repository stored on Github
 
 ### Page Deployment
 
+- First created Heroku account, then clicked "New" to create a new app from the dashboard.
+- Craeted a unique name,'Minesweeper-python'. Picked region (europe), Press "Create app"
+- Clicked settings. Added buildpacks "Python" and "NodeJS", in that order.
+- Next went to Deploy tab and scrolled down to Deployment Method.
+- Selected GitHub and searched for MineSweeper-test.
+- Scrolled down to deploy options. Picked manual deploy method
+- Main branch and clicked Deploy Branch. Deploys the current state of the branch specified.
+- App is built and finished when a green checkmark appears.
+- View app by clicking button and open new tab.
 
-### Cloning of the Repository Code locally
+### Cloning of repository locally 
+  <ul>
+<li>Find the desired repository.</li>
+<li>Locate code button above all project files</li>
+<li>Click on HTTPS and copy repository link.</li>
+<li>I used Visual studios, and pasted the url into the IDE’s terminal</li>
+</ul>
 
-
-
+ 
 ## Content
 
 ### Technologies Used
