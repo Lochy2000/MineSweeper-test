@@ -65,7 +65,10 @@ Difficulty levels. This can be done by adding three game modes which have more o
 ### Error Handling
 
 - Player is asked to add a col & row and shown an example. If they forget the comma, use more than two numbers or use letters. The player is promted to changed to the correct format:
-  ![image](https://github.com/user-attachments/assets/f1c40050-15c4-4e4b-a21d-360576a0b431)
+
+  
+ ![image](https://github.com/user-attachments/assets/94c54b92-b14f-43b9-a6af-40b13d0722e8)
+
 
 
 
