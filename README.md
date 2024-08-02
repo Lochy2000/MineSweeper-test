@@ -22,8 +22,7 @@ Game proives clear intructions and also input location. Additionally, it has ASC
 The goal is to clear the hidden game board by tpying in specific locations to the input section. However, the board has hidden bombs. The game provides hints in the form of numbers of how many bombs there are in a 3x3 area. For example if the number is 0 there are no bombs with a 3x3 area of that 0.
 
 ### Future Goals
-This game could have a difficulity level. Currently the game only radomly puts out 10 bombs. No more no less. Different levels could be added with less or more bombs to increase the difficulty. 
-Additonally, a timer could be added. Creating a sense of urgiency in the game. Also this means a highscore section could be added with the fastest time compleition.
+Difficulty levels. This can be done by adding three game modes which have more or less number of bombs.
 
 
 ### Flowchart
@@ -68,29 +67,69 @@ Additonally, a timer could be added. Creating a sense of urgiency in the game. A
 
 
 ### Future Features
+- Add different levels
+- A highscore option, based on how fast you finish the board
+
 
 
 
 ## Testing
-
+- Tested on GIThub and Horoku.
+- Tested by mentor Spencor.
+- Tested by my dad (big minesweeper fan)
+- Ran Code through  CI Python Linter
 
 
 
 
 ### Feature testing
 -   tested that all functions running the game was working as it should by checking:
+  ![image](https://github.com/user-attachments/assets/35a87820-0553-4391-abad-bfc8a11cbd29)
+
 
 
 
 
 ### Validator Testing
 
+- Used https://pep8ci.herokuapp.com/ and put run.py file through it.
+- Errors due to white space in ASCII art or due to the spacing left on the comments.
+
+![image](https://github.com/user-attachments/assets/ea34f1d4-3885-4c2c-a5fc-c54942a5ae56)
 
 
 
 ## Bugs
 
+- Main bug was due to the adding of colorama to the game board. This caused a spacing issue on the board due to the colour codes not being taken into account when calculating the column widths. The issue was in the def __str__(self). The solution ended up using strip_color to remove color codes and calculate the maximum width for each column based on the actual content.
 
+   0  1  2  3  4  5  6  7  8  9
+-------------------------------------------
+ 0|   |   |   |   |   |   |   |   |   |   |
+ 1|   |   |   |   |   |   |   |   |   |   |
+ 2|   |   |   |   |   |   |   |   |   |   |
+ 3|   |   |   |   |   |   |1|   |   |   |
+ 4|   |   |   |   |   |   |   |   |   |   |
+ 5|   |   |   |   |   |   |   |   |   |   |
+ 6|   |   |   |   |   |   |   |   |   |   |
+ 7|   |   |   |   |   |   |   |   |   |   |
+ 8|   |   |   |   |   |   |   |   |   |   |
+ 9|   |   |   |   |   |   |   |   |   |   |
+-------------------------------------------
+
+   0  1  2  3  4  5           6  7  8  9
+-------------------------------------------
+ 0|  |  |  |  |  |           |  |  |  |  |
+ 1|  |  |  |  |  |           |  |  |  |  |
+ 2|  |  |  |  |  |           |  |  |  |  |
+ 3|  |  |  |  |  |F |  |  |  |  |
+ 4|  |  |  |  |  |           |  |  |  |  |
+ 5|  |  |  |  |  |           |  |  |  |  |
+ 6|  |  |  |  |  |           |  |  |  |  |
+ 7|  |  |  |  |  |           |  |  |  |  |
+ 8|  |  |  |  |  |           |  |  |  |  |
+ 9|  |  |  |  |  |           |  |  |  |  |
+-------------------------------------------
 
 
 ### Unfixed bugs
