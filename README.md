@@ -2,7 +2,7 @@
 
 ![image](https://github.com/user-attachments/assets/28300b09-9fc9-4cfd-8a41-2bc68db6de54)
 
-MineSweeper orginally created in 1990 by microsoft as a single player computer game. This game follows the same style of rules and outcome. The Main goal of the game is to correctly figure out where the bombs are located on the board without hitting there locations. This is mainly done logic and at time partly guessing (depending how good you are). The game supplies the player with a numer which referes to the numer of near by bombs. From thi information the player can work out which locations are safe and which have a hidden bomb. If the board is completed the player get a nice WELL DONE! message.
+MineSweeper orginally created in 1990 by microsoft as a single player computer game. This game follows the same style of rules and outcome. The Main goal of the game is to correctly figure out where the bombs are located on the board without hitting there locations. This is mainly done logic and at time partly guessing (depending how good you are). The game supplies the player with a numer which referes to the numer of near by bombs. From this information the player can work out which locations are safe and which have a hidden bomb. If the board is completed the player get a nice WELL DONE! message.
 
 Deployed version of Heroku can be found [here](https://minesweeper-python-56b9c81700d5.herokuapp.com/)
 
@@ -10,19 +10,19 @@ Deployed version of Heroku can be found [here](https://minesweeper-python-56b9c8
 ## User Experience (UX)
 
 ### Site Purpose
-The purpose of this game was to be a fun logical puzzle game. Where a player can test there ability to figure out how to complete the gameboard without hitting a bomb.
+The purpose of this was to be a fun logical puzzle game. Where a player can test there ability to figure out how to complete the gameboard without hitting a bomb.
 
 ### Audience
-This game was created for minesweeper fans, also in general this a fun game to play/
+This game was created for minesweeper fans, also in general this a fun game to play.
 
 ### Communication
-Game proives clear intructions and also input location. Additionally, it has ASCII art which displays a colourful phrases on the games progression, example GAMEOVER or WELL DONE!!
+Game proives clear intructions and also input location. Additionally, it has ASCII art which displays colourful phrases on the games progression, example GAMEOVER or WELL DONE!!
 
 ### User Goals
-The goal is to clear the hidden game board by tpying in specific locations to the input section. However, the board has hidden bombs. The game provides hints in the form of numbers of how many bombs there are in a 3x3 area. For example if the number is 0 there are no bombs with a 3x3 area of that 0.
+The goal is to clear the hidden game board by typing in specific locations to the input section. However, the board has hidden bombs. The game provides hints in the form of numbers of how many bombs there are in a 3x3 area. For example if the number is 0 there are no bombs with a 3x3 area of that 0.
 
 ### Future Goals
-Difficulty levels. This can be done by adding three game modes which have more or less number of bombs.
+Difficulty levels. This can be done by adding levels which have more bombs to make it more difficult.
 
 
 ### Flowchart
@@ -35,7 +35,7 @@ Difficulty levels. This can be done by adding three game modes which have more o
   
   ![image](https://github.com/user-attachments/assets/7a9e4dd1-207d-4d48-a878-65da3705a3e7)
 
-- Player can then scroll down and the Game board with all the hidden locations is revealed
+- Player can then scroll down. The Game board with all the hidden locations is revealed
   
   ![image](https://github.com/user-attachments/assets/1fac627d-7399-45e0-8d92-c2dd2f7c77f0)
 
@@ -43,7 +43,7 @@ Difficulty levels. This can be done by adding three game modes which have more o
   
   ![image](https://github.com/user-attachments/assets/2f4da074-fe21-4c07-b40f-100e69175642)
 
-- Based on the chosen location the player the sees various numbers, representing the number of surrounding bombs. These locations are randomised each new game.
+- Based on the chosen location the player then sees various numbers, representing the number of surrounding bombs. These locations are randomised each new game and thus the numbers will changed too.
   
   ![image](https://github.com/user-attachments/assets/1e6478dd-b12d-4b8e-811b-5e73324ba89e)
 
@@ -55,10 +55,9 @@ Difficulty levels. This can be done by adding three game modes which have more o
 
 ![image](https://github.com/user-attachments/assets/eaf5fb3a-e373-42ea-844c-9d5d7664aae0)
 
-- A WELL DONE!! ASCII message is displayed. A sense of satisfaction and complistion.
+- A WELL DONE!! ASCII message is displayed. A sense of satisfaction and complition.
 
   ![image](https://github.com/user-attachments/assets/62d368e0-c5bc-44e5-82b4-af6947766955)
-
 
 
 
@@ -67,7 +66,8 @@ Difficulty levels. This can be done by adding three game modes which have more o
 - Player is asked to add a col & row and shown an example. If they forget the comma, use more than two numbers or use letters. The player is promted to changed to the correct format:
 
   
- ![image](https://github.com/user-attachments/assets/94c54b92-b14f-43b9-a6af-40b13d0722e8)
+![image](https://github.com/user-attachments/assets/095a1779-5967-4ed4-acd1-ece502d175c9)
+
 
 
 
@@ -80,7 +80,8 @@ Difficulty levels. This can be done by adding three game modes which have more o
 
 
 ## Testing
-- Tested on GIThub and Horoku.
+- Tested on Visual studios during the built process
+- Tested on Horoku.
 - Tested by mentor Spencor.
 - Tested by my dad (big minesweeper fan)
 - Ran Code through  CI Python Linter
@@ -99,7 +100,7 @@ Difficulty levels. This can be done by adding three game modes which have more o
 ### Validator Testing
 
 - Used https://pep8ci.herokuapp.com/ and put run.py file through it.
-- Errors due to white space in ASCII art or due to the spacing left on the comments.
+- Errors mainly due to white space in ASCII art or due to the spacing left on the comments. None of the erros had any effect on game handling.
 
 ![image](https://github.com/user-attachments/assets/ea34f1d4-3885-4c2c-a5fc-c54942a5ae56)
 
@@ -107,7 +108,7 @@ Difficulty levels. This can be done by adding three game modes which have more o
 
 ## Bugs
 
-- Main bug was due to the adding of colorama to the game board. This caused a spacing issue on the board due to the colour codes not being taken into account when calculating the column widths. The issue was in the def __str__(self). The solution ended up using strip_color to remove color codes and calculate the maximum width for each column based on the actual content.
+- Main bug was due to the adding of colorama to the game board. This caused a spacing issue on the board due to the colour codes not being taken into account when calculating the column widths. The issue was in the def __str__(self). The solution was to create a function called strip_color to remove color codes and calculate the maximum width for each column based on the actual content. Which could then be called in the __Str(self)__ function to stop the gameboard width increasing.
 
 ![image](https://github.com/user-attachments/assets/3bc1e70b-bc36-4c53-b6e5-f90507bb1207)
 
@@ -120,7 +121,8 @@ Difficulty levels. This can be done by adding three game modes which have more o
 ## Deployment
 
 ### Version Control
-- The game was made using Visual studio code. It was pushed to Github using a remote repository called ‘MineSweeper-Test’. Was called 'test' wasn't sure I would be able to use it as a project until I spoke with my mentor.
+- The game was made using Visual studio code. It was pushed to Github using a remote repository called ‘MineSweeper-Test’. The reasos it has 'test' in the name is becuase I had previusly tried to create a minesweeper game and did not get it working. This could be changed but I ran out of time.
+  
 - Git hub commands were used through-out to push the game to the remote repository. The commands used were as follows:
 
   -Git add . – adds files to staging area
@@ -171,7 +173,7 @@ Difficulty levels. This can be done by adding three game modes which have more o
 
 - My main help for this project came from a [freecodecamp video](https://www.youtube.com/watch?v=8ext9G7xspg&t=5236s&ab_channel=freeCodeCamp.org).
 - Used [StackOverflow](https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi-escape-sequences-from-a-string-in-python)for trouble shooting.
-- Adding Flag used TokoEdTech [video](https://www.youtube.com/watch?v=XTT8mXwIGpQ&ab_channel=TokyoEdtech)
+- Add Flag used TokoEdTech [video](https://www.youtube.com/watch?v=XTT8mXwIGpQ&ab_channel=TokyoEdtech)
 - My mentor Spencor also helped come up with the idea of adding 'f' to the front of the inputs to add a flag.
 - Creds to my dad to passin on his extensive minesweeper knowleadge.
 
